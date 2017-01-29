@@ -133,6 +133,7 @@ document.onkeydown = function(event) {
 				if (hangman.isVictory()){
 					// tell them they won
 					document.getElementById("message").value = "You saved a life!";
+					alert("You Won! Congrats! Refresh the page to start again.")
 				}
 			}
 		}
