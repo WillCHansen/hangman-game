@@ -3,7 +3,23 @@ body{
 }
 div{
 	padding: 30px;
+	padding-top: 0px;
 }
 #message{
-	width: 200px;
+	width: 250px;
+}
+input{
+	text-align: center;
+	font-size: 100%;
+}
+p{
+	display: inline-block;
+	margin-bottom: 5px;
+}
+.ps{
+	padding-bottom: 0px;
+}
+.mid{
+	padding-left: 50px;
+    padding-right: 50px;
 }
