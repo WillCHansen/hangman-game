@@ -1,0 +1,9 @@
+body{
+	text-align: center;
+}
+div{
+	padding: 30px;
+}
+#message{
+	width: 200px;
+}
