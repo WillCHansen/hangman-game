@@ -84,6 +84,7 @@ var hangman = {
 		document.getElementById("Hangman").value = hangmanstr.replace(/\,/g," ");
 		document.getElementById("incorrect").value = "";
 		document.getElementById("correct").value = "";
+		document.getElementById("Remaining").value = this.life;
 		document.getElementById("wincount").value = this.winCount;
 	},
 };
