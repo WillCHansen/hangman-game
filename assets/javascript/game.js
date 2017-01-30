@@ -51,7 +51,7 @@ var codingterms = ["javascript", "styles", "hypertext", "markup", "language", "p
 var hangman = {
 	// set initial stats
 	life: 5,
-	winCount: -1,
+	winCount: 0,
 	// this method checks if he's dead
 	isDead: function(){
 		if ( this.life < 1 ){
@@ -74,27 +74,21 @@ var hangman = {
 		this.incorrectarr = [];
 		this.guessarr = [];
 		this.life = 5;
+		this.gameOver = false;
+		// this selects a random term for the game
 		this.term = codingterms[Math.floor(Math.random() * codingterms.length)];
-		this.winCount++
 		// I dont know if an instructor is reading this, but you're welcome for logging the word you're trying to guess
 		console.log("Answer: " + this.term)
+		// generate initial hangman string report to user.
 		var hangmanstr = create_cur_hang(hangman.term, hangman.correctarr).toString();
 		document.getElementById("Hangman").value = hangmanstr.replace(/\,/g," ");
+		document.getElementById("incorrect").value = "";
+		document.getElementById("correct").value = "";
+		document.getElementById("wincount").value = this.winCount;
 	},
 };
-// this selects a random term for the game
-hangman.term = codingterms[Math.floor(Math.random() * codingterms.length)];
 
-// I dont know if an instructor is reading this, but you're welcome for logging the word you're trying to guess
-console.log(hangman.term)
-
-// here im initializing arrays to be used later. Still not sure if necessary in this language
-hangman.correctarr = [];
-hangman.incorrectarr = [];
-hangman.guessarr = [];
-// generate initial hangman string report to user.
-var hangmanstr = create_cur_hang(hangman.term, hangman.correctarr).toString();
-document.getElementById("Hangman").value = hangmanstr.replace(/\,/g," ");
+hangman.newInstance();
 
 // Start our routine for when a key is pressed
 document.onkeydown = function(event) {
@@ -140,14 +134,16 @@ document.onkeydown = function(event) {
 				document.getElementById("Remaining").value = hangman.life;
 				// check if he ded
 				if (hangman.isDead()){
-					// tell them they lost. Every other message to the user has been polite, I think a sterner message here is justified
-					document.getElementById("message").value = "GAME OVER HE'S DEAD NOW";
+					// tell them they lost. 
+					document.getElementById("message").value = "You lost. New game Started.";
+					hangman.newInstance();
 				}
 				// check for a isVictory
 				if (hangman.isVictory()){
 					// tell them they won
-					document.getElementById("message").value = "You saved a life!";
-					alert("You Won! Congrats! Refresh the page to start again.")
+					document.getElementById("message").value = "You Won! New game Started.";
+					hangman.winCount++
+					hangman.newInstance();
 				}
 			}
 		}
