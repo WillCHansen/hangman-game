@@ -44,10 +44,14 @@ function create_cur_hang(term, correctarr){
 	return outarr
 }
 
+// this is coding hangman so here are the terms (global)
+var codingterms = ["javascript", "styles", "hypertext", "markup", "language", "python", "coding", "bootcamp", "foobar", "rickrolled"];
+
 // this is the poor dude who's hanging (object)
 var hangman = {
-	// set initial life
+	// set initial stats
 	life: 5,
+	winCount: -1,
 	// this method checks if he's dead
 	isDead: function(){
 		if ( this.life < 1 ){
@@ -64,10 +68,20 @@ var hangman = {
 			return true
 		}
 	},
+	// start new game
+	newInstance: function(){
+		this.correctarr = [];
+		this.incorrectarr = [];
+		this.guessarr = [];
+		this.life = 5;
+		this.term = codingterms[Math.floor(Math.random() * codingterms.length)];
+		this.winCount++
+		// I dont know if an instructor is reading this, but you're welcome for logging the word you're trying to guess
+		console.log("Answer: " + this.term)
+		var hangmanstr = create_cur_hang(hangman.term, hangman.correctarr).toString();
+		document.getElementById("Hangman").value = hangmanstr.replace(/\,/g," ");
+	},
 };
-
-// this is coding hangman so here are the terms
-var codingterms = ["javascript", "styles", "hypertext", "markup", "language", "python", "coding", "bootcamp", "foobar", "rickrolled"];
 // this selects a random term for the game
 hangman.term = codingterms[Math.floor(Math.random() * codingterms.length)];
 
